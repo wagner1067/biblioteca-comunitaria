@@ -6,11 +6,7 @@ app.use(express.json());
 
 const users = [];
 
-app.post("/users", (req, res) => {
-  const body = req.body;
-  users.push(body);
-  res.status(201).send("Usuário criado com sucesso");
-});
+app.post("/users", createUserController(req, res));
 
 app.get("/users", (req, res) => {
   res.status(200).json({ message: "Esse são os usuários:", users });
