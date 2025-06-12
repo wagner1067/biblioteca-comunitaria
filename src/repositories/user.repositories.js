@@ -23,7 +23,7 @@ function createUserRepository(newUser) {
         if (err) {
           reject(err);
         } else {
-          resolve({ message: "Usuário criado com sucesso" });
+          resolve({ id: this.lastID, ...newUser });
         }
       }
     );
