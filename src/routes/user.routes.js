@@ -10,5 +10,12 @@ router.post(
   validate(userSchema),
   userController.createUserController
 );
+router.get("/users", userController.findAllUsersController);
+router.get("/users/:id", userController.findUserByIdController);
+router.put(
+  "/users/:id",
+  validate(userSchema),
+  userController.updateUserController
+);
 
 export default router;
