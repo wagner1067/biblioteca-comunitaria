@@ -49,7 +49,8 @@ function findUserByEmail(email) {
   });
 }
 
-function findUserById(id) {
+
+function findUserByIdRepository(id) {
   return new Promise((resolve, reject) => {
     db.get(
       `
@@ -68,12 +69,12 @@ function findUserById(id) {
   });
 }
 
-function findAllUsers() {
+
+function findAllUserRepository() {
   return new Promise((resolve, reject) => {
     db.all(
       `
-      SELECT id, username, email, avatar 
-      FROM users
+    SELECT id, username, email, avatar FROM users  
       `,
       [],
       (err, rows) => {
@@ -87,16 +88,18 @@ function findAllUsers() {
   });
 }
 
-function updateUser(id, user) {
+
+function updateUserRepository(id, user) {
   return new Promise((resolve, reject) => {
     const { username, email, password, avatar } = user;
     db.run(
       `
       UPDATE users SET 
-        username = ?, 
-        email = ?,
-        password = ?,
-        avatar = ?
+
+       username = ?, 
+       email = ?, 
+       password = ?, 
+       avatar= ? 
       WHERE id = ?`,
       [username, email, password, avatar, id],
       (err) => {
@@ -113,7 +116,7 @@ function updateUser(id, user) {
 export default {
   createUserRepository,
   findUserByEmail,
-  findUserById,
-  findAllUsers,
-  updateUser,
+  findUserByIdRepository,
+  findAllUserRepository,
+  updateUserRepository,
 };

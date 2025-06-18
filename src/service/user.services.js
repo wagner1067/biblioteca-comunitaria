@@ -13,32 +13,36 @@ async function createUserService(newUser) {
   return user;
 }
 
-async function findAllUsersService() {
-  const users = await userRepositories.findAllUsers();
-  if (!users) throw new Error("Nenhum usuário encontrado");
+
+async function findAllUserService() {
+  const users = await userRepositories.findAllUserRepository();
+  if (!users) throw new Error("Nenhum usuário cadastrado!");
   return users;
 }
 
 async function findUserByIdService(id) {
-  const user = await userRepositories.findUserById(id);
-  if (!user) throw new Error("Usuário nao encontrado");
+
+  const user = await userRepositories.findUserByIdRepository(id);
+  if (!user) throw new Error("Usuário não existe!");
   return user;
 }
 
-async function updateUserService(newUser, userID) {
-  const user = await userRepositories.findUserById(userID);
-  if (!user) throw new Error("Usuário não existe!");
+async function updateUserService(newUser, userId) {
+  const user = await userRepositories.findUserByIdRepository(userId);
+  if (!user) throw new Error("Usuário não encontrado!");
   if (newUser.password) {
     newUser.password = await bcrypt.hash(newUser.password, 10);
   }
-  const userUpdated = await userRepositories.updateUser(userID, newUser);
-  if (!userUpdated) throw new Error("Erro ao atualizar usuário");
+  const userUpdated = await userRepositories.updateUserRepository(
+    userId,
+    newUser
+  );
   return userUpdated;
 }
 
 export default {
   createUserService,
-  findAllUsersService,
+  findAllUserService,
   findUserByIdService,
   updateUserService,
 };
