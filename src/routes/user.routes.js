@@ -10,6 +10,7 @@ router.post(
   validate(userSchema),
   userController.createUserController
 );
+
 router.get("/users", userController.findAllUserController);
 router.get("/users/:id", userController.findUserByIdController);
 router.put(

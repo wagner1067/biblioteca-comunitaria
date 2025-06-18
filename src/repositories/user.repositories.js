@@ -49,6 +49,7 @@ function findUserByEmail(email) {
   });
 }
 
+
 function findUserByIdRepository(id) {
   return new Promise((resolve, reject) => {
     db.get(
@@ -68,6 +69,7 @@ function findUserByIdRepository(id) {
   });
 }
 
+
 function findAllUserRepository() {
   return new Promise((resolve, reject) => {
     db.all(
@@ -86,12 +88,14 @@ function findAllUserRepository() {
   });
 }
 
+
 function updateUserRepository(id, user) {
   return new Promise((resolve, reject) => {
     const { username, email, password, avatar } = user;
     db.run(
       `
       UPDATE users SET 
+
        username = ?, 
        email = ?, 
        password = ?, 

@@ -13,6 +13,7 @@ async function createUserController(req, res) {
   }
 }
 
+
 async function findAllUserController(req, res) {
   try {
     const users = await userServices.findAllUserService();
@@ -29,6 +30,7 @@ async function findUserByIdController(req, res) {
 
   try {
     const user = await userServices.findUserByIdService(id);
+
     res.status(200).send(user);
   } catch (error) {
     res
@@ -38,6 +40,7 @@ async function findUserByIdController(req, res) {
 }
 
 async function updateUserController(req, res) {
+
   const { id } = req.params;
   const newUser = req.body;
 
@@ -53,7 +56,7 @@ async function updateUserController(req, res) {
 
 export default {
   createUserController,
-  findAllUserController,
+findAllUserController,
   findUserByIdController,
   updateUserController,
 };

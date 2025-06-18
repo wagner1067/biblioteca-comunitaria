@@ -13,6 +13,7 @@ async function createUserService(newUser) {
   return user;
 }
 
+
 async function findAllUserService() {
   const users = await userRepositories.findAllUserRepository();
   if (!users) throw new Error("Nenhum usuário cadastrado!");
@@ -20,6 +21,7 @@ async function findAllUserService() {
 }
 
 async function findUserByIdService(id) {
+
   const user = await userRepositories.findUserByIdRepository(id);
   if (!user) throw new Error("Usuário não existe!");
   return user;
