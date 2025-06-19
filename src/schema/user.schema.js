@@ -17,7 +17,10 @@ const userSchema = z.object({
 });
 
 const userIdSchema = z.object({
-  userId: z.number().int().positive("User ID must be a positive integer"),
+  userId: z
+    .number()
+    .int()
+    .positive("Uso ID do usuário deve ser um número positivo"),
 });
 
 export { userSchema, userIdSchema };
