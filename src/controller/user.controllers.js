@@ -13,7 +13,6 @@ async function createUserController(req, res) {
   }
 }
 
-
 async function findAllUserController(req, res) {
   try {
     const users = await userServices.findAllUserService();
@@ -40,7 +39,6 @@ async function findUserByIdController(req, res) {
 }
 
 async function updateUserController(req, res) {
-
   const { id } = req.params;
   const newUser = req.body;
 
@@ -54,9 +52,20 @@ async function updateUserController(req, res) {
   }
 }
 
+async function deleteUserController(req, res) {
+  try {
+    const userId = req.params.id;
+    const response = await userServices.deleteUserService(userId);
+    return res.send(response);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+}
+
 export default {
   createUserController,
-findAllUserController,
+  findAllUserController,
   findUserByIdController,
   updateUserController,
+  deleteUserController,
 };

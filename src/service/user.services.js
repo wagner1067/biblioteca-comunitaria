@@ -13,7 +13,6 @@ async function createUserService(newUser) {
   return user;
 }
 
-
 async function findAllUserService() {
   const users = await userRepositories.findAllUserRepository();
   if (!users) throw new Error("Nenhum usuário cadastrado!");
@@ -21,7 +20,6 @@ async function findAllUserService() {
 }
 
 async function findUserByIdService(id) {
-
   const user = await userRepositories.findUserByIdRepository(id);
   if (!user) throw new Error("Usuário não existe!");
   return user;
@@ -40,9 +38,17 @@ async function updateUserService(newUser, userId) {
   return userUpdated;
 }
 
+async function deleteUserService(userId) {
+  const user = await userRepositories.findUserByIdRepository(userId);
+  if (!user) throw new Error("Usuário não encontrado!");
+  const { message } = await userRepositories.deleteUserRepository(userId);
+  return message;
+}
+
 export default {
   createUserService,
   findAllUserService,
   findUserByIdService,
   updateUserService,
+  deleteUserService,
 };

@@ -49,7 +49,6 @@ function findUserByEmail(email) {
   });
 }
 
-
 function findUserByIdRepository(id) {
   return new Promise((resolve, reject) => {
     db.get(
@@ -69,7 +68,6 @@ function findUserByIdRepository(id) {
   });
 }
 
-
 function findAllUserRepository() {
   return new Promise((resolve, reject) => {
     db.all(
@@ -87,7 +85,6 @@ function findAllUserRepository() {
     );
   });
 }
-
 
 function updateUserRepository(id, user) {
   return new Promise((resolve, reject) => {
@@ -113,10 +110,23 @@ function updateUserRepository(id, user) {
   });
 }
 
+async function deleteUserRepository(id) {
+  return new Promise((resolve, reject) => {
+    db.run(`DELETE FROM users WHERE id = ?`, [id], (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve({ message: "Usuário deletado com sucesso", id });
+      }
+    });
+  });
+}
+
 export default {
   createUserRepository,
   findUserByEmail,
   findUserByIdRepository,
   findAllUserRepository,
   updateUserRepository,
+  deleteUserRepository,
 };
