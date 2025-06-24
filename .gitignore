@@ -2,3 +2,4 @@
 *.sqlite
 *.sqlite3
 bbiblioteca_comunitaria.sqlite
+.env
