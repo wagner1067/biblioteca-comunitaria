@@ -27,7 +27,7 @@ export function authMiddleware(req, res, next) {
     if (!user || !user.id) {
       return res.status(401).send({ message: "Token inválido" });
     }
-    req.userId = user.id;
+    req.user = { id: user.id };
 
     return next();
   });

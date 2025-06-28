@@ -1,6 +1,7 @@
 import db from "../config/database.js";
 
-db.run(`
+db.run(
+  `
     CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE NOT NULL,
@@ -8,7 +9,15 @@ db.run(`
     password TEXT NOT NULL,
     avatar TEXT
     )
-    `);
+    `,
+  (err) => {
+    if (err) {
+      console.error("Erro ao criar tabela books:", err.message);
+    } else {
+      console.log("Tabela users criada/verificada com sucesso.");
+    }
+  }
+);
 
 function createUserRepository(newUser) {
   return new Promise((resolve, reject) => {
