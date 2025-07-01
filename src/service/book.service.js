@@ -15,7 +15,41 @@ async function findAllBooksService() {
   return books;
 }
 
+async function findBookByIdService(bookId) {
+  const book = await bookRepository.findBookByIdRepository(bookId);
+  if (!book) throw new Error("Livro nao encontrado!");
+  return book;
+}
+
+async function updateBookService(bookId, updatedBook, userId) {
+  const book = await bookRepository.findBookByIdRepository(bookId);
+  if (!book) throw new Error("Livro nao encontrado!");
+  if (book.userId !== userId) {
+    throw new Error("Acesso negado! Voce nao pode editar este livro.");
+  }
+  const response = await bookRepository.updateBookRepository(
+    updatedBook,
+    bookId
+  );
+  if (!response) throw new Error("Erro ao atualizar livro");
+  return response;
+}
+
+async function deleteBookService(bookId, userId) {
+  const book = await bookRepository.findBookByIdRepository(bookId);
+  if (!book) throw new Error("Livro nao encontrado!");
+  if (book.userId !== userId) {
+    throw new Error("Acesso negado! Voce nao pode deletar este livro.");
+  }
+  const response = await bookRepository.deleteBookRepository(bookId);
+  if (!response) throw new Error("Erro ao deletar livro");
+  return response;
+}
+
 export default {
   createBookService,
   findAllBooksService,
+  findBookByIdService,
+  updateBookService,
+  deleteBookService,
 };
