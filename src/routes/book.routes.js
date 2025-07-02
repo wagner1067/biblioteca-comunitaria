@@ -5,7 +5,7 @@ import {
   validate,
   validateBookId,
 } from "../middlewares/validation.middlewares.js";
-import { bookSchema } from "../schema/book.schema.js";
+import { bookSchema, bookSearchSchema } from "../schema/book.schema.js";
 
 const router = Router();
 
@@ -16,6 +16,11 @@ router.post(
   "/books",
   validate(bookSchema),
   bookController.createBookController
+);
+router.get(
+  "/books/search",
+  validate(bookSearchSchema, "query"),
+  bookController.searchBooksController
 );
 router.get("/books/:id", validateBookId, bookController.findBookByIdController);
 router.patch("/books/:id", validateBookId, bookController.updateBookController);
