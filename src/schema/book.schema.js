@@ -9,4 +9,7 @@ const bookIdSchema = z.object({
   bookId: z.number().int().positive("ID do livro deve ser um número positivo"),
 });
 
-export { bookSchema, bookIdSchema };
+const bookSearchSchema = z.object({
+  search: z.string().min(3, "Termo de busca é obrigatório"),
+});
+export { bookSchema, bookIdSchema, bookSearchSchema };

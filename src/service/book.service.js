@@ -45,6 +45,11 @@ async function deleteBookService(bookId, userId) {
   if (!response) throw new Error("Erro ao deletar livro");
   return response;
 }
+async function searchBooksService(search) {
+  if (!search) return await bookRepository.findAllBooksRepository();
+  const books = bookRepository.searchBooksRepository(search);
+  return books;
+}
 
 export default {
   createBookService,
@@ -52,4 +57,5 @@ export default {
   findBookByIdService,
   updateBookService,
   deleteBookService,
+  searchBooksService,
 };
