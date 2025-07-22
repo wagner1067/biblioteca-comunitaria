@@ -1,5 +1,6 @@
 import { userIdSchema } from "../schema/user.schema.js";
 import { bookIdSchema } from "../schema/book.schema.js";
+import { loanIdSchema } from "../schema/loan.shema.js";
 
 const validate =
   (schema, type = "body") =>
@@ -39,4 +40,18 @@ const validateBookId = (req, res, next) => {
   }
 };
 
-export { validate, validateUserId, validateBookId };
+const validateLoanId = (req, res, next) => {
+  try {
+    loanIdSchema.parse({ loanId: +req.params.id });
+    if (isNaN(+req.params.id)) {
+      throw new Error("Id inválido");
+    }
+    next();
+  } catch (error) {
+    res
+      .status(404)
+      .json({ message: "Erro de validação", error: error.message });
+  }
+};
+
+export { validate, validateUserId, validateBookId, validateLoanId };
